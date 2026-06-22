@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI × Ronin · Proposta di Servizio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+:root{--bg:#060608;--surface:#0E0F14;--surface2:#161820;--border:rgba(255,255,255,0.06);--bg2:rgba(201,168,76,0.25);--gold:#C9A84C;--gl:#E2C472;--white:#F5F5F7;--muted:#6B7280;--teal:#00C9A7;--nw:220px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.012'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none;z-index:0}
+
+/* ── SIDEBAR NAV ── */
+nav{position:fixed;left:0;top:0;bottom:0;width:var(--nw);background:rgba(6,6,8,0.94);backdrop-filter:blur(20px);border-right:1px solid var(--border);z-index:100;display:flex;flex-direction:column;padding:28px 0}
+.nl{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.wm{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.5px;color:var(--white);display:flex;align-items:center;gap:8px}
+.wm span{color:var(--gold)}
+.sub{font-size:9px;color:var(--muted);letter-spacing:2.5px;text-transform:uppercase;margin-top:5px}
+.nls{flex:1;padding:0 12px;overflow-y:auto}
+.ni{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:6px;cursor:pointer;transition:all .18s;margin-bottom:2px;text-decoration:none;color:var(--muted);font-size:12px;font-weight:500;letter-spacing:.3px}
+.ni:hover{background:rgba(201,168,76,.18);color:var(--gold);transform:translateX(6px);border-left:2px solid var(--gold);padding-left:12px}
+.ni.active{background:rgba(201,168,76,.1);color:var(--gold)}
+.nn{font-size:9px;font-weight:700;color:var(--gold);opacity:.5;min-width:14px}
+.ni.active .nn{opacity:1}
+.nf{padding:16px 20px;border-top:1px solid var(--border);font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.nd{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 2.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── BURGER ── */
+.burger{display:none;position:fixed;top:12px;right:12px;z-index:400;width:42px;height:42px;background:rgba(6,6,8,.92);border:1px solid var(--border);border-radius:9px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;backdrop-filter:blur(14px);transition:border-color .2s}
+.burger:hover{border-color:var(--gold)}
+.burger span{display:block;width:18px;height:2px;background:var(--white);border-radius:2px;transition:all .22s}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mnav{display:none;position:fixed;inset:0;background:rgba(6,6,8,.98);backdrop-filter:blur(20px);z-index:300;flex-direction:column;padding:28px 0;overflow-y:auto}
+.mnav.open{display:flex}
+.mnav .nls{padding:0 16px}
+.mnav .ni{padding:12px 14px;font-size:14px}
+.mnav .nn{font-size:11px}
+
+/* ── LAYOUT ── */
+main{margin-left:var(--nw);min-height:100vh;position:relative;z-index:1}
+section{min-height:100vh;padding:72px 60px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+
+/* ── TYPOGRAPHY ── */
+.ey{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.ey::after{content:'';flex:1;height:1px;background:var(--bg2);max-width:48px}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(34px,4vw,62px);line-height:1.05;font-weight:700;letter-spacing:-1.5px}
+h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,3vw,46px);line-height:1.1;font-weight:700;letter-spacing:-1px}
+h3{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;letter-spacing:-.3px}
+em.g{color:var(--gold);font-style:normal}
+.lead{font-size:16px;color:var(--muted);line-height:1.75;max-width:620px;margin-top:14px}
+.dv{width:40px;height:2px;background:var(--gold);margin:18px 0 30px;opacity:.7}
+
+/* ── CARDS ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:22px;transition:border-color .25s,transform .25s,box-shadow .25s,background .25s}
+.card:hover{border-color:var(--gold);transform:translateY(-6px);background:rgba(201,168,76,.06);box-shadow:0 20px 60px rgba(201,168,76,.22),0 0 0 1px rgba(201,168,76,.3)}
+.ci{width:32px;height:32px;border-radius:7px;background:rgba(201,168,76,.08);border:1px solid var(--bg2);display:flex;align-items:center;justify-content:center;font-size:15px;margin-bottom:14px}
+.card ul{list-style:none;margin-top:10px}
+.card ul li{font-size:12.5px;color:var(--muted);padding:3px 0;display:flex;gap:7px}
+.card ul li::before{content:'›';color:var(--gold);flex-shrink:0}
+
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+
+/* ── ROLE CARD (team) ── */
+.rc{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 24px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s,box-shadow .25s,background .25s}
+.rc:hover{border-color:var(--gold);transform:translateY(-6px);background:rgba(201,168,76,.06);box-shadow:0 20px 60px rgba(201,168,76,.22),0 0 0 1px rgba(201,168,76,.3)}
+.rc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.rc.mp::before{background:linear-gradient(90deg,#4f46e5,#818cf8)}
+.rc.ds::before{background:linear-gradient(90deg,#059669,#34d399)}
+.rc.ai::before{background:linear-gradient(90deg,var(--gold),var(--gl))}
+.role-eyebrow{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;opacity:.7}
+.rc h3{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:10px}
+.rc p{font-size:13px;color:var(--muted);line-height:1.7}
+.rc ul{list-style:none;margin-top:14px}
+.rc ul li{font-size:12px;color:var(--muted);padding:3px 0;display:flex;gap:8px}
+.rc ul li::before{content:'›';color:var(--gold);flex-shrink:0}
+
+/* ── STEPS (metodo) ── */
+.steps-wrap{margin-top:48px;display:flex;flex-direction:column;gap:0}
+.step-item{display:flex;gap:28px;padding:28px 0;border-bottom:1px solid var(--border);position:relative;transition:background .2s}
+.step-item:last-child{border-bottom:none}
+.step-item:hover{background:rgba(201,168,76,.03)}
+.step-num-wrap{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:0}
+.step-num{width:44px;height:44px;border-radius:50%;background:rgba(201,168,76,.06);border:1px solid var(--bg2);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:var(--gold)}
+.step-body h4{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;color:var(--white);margin-bottom:6px}
+.step-body p{font-size:13px;color:var(--muted);line-height:1.65;max-width:560px}
+.step-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.stag{font-size:9px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:4px;padding:2px 8px;color:var(--muted);letter-spacing:.5px}
+
+/* ── ASSESSMENT BOX ── */
+.a0-wrap{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.a0-left{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:36px 32px}
+.a0-right{display:flex;flex-direction:column;gap:14px}
+.a0-price-box{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.03));border:1px solid var(--bg2);border-radius:12px;padding:28px 26px;margin-bottom:4px}
+.price-old{font-size:13px;color:var(--muted);text-decoration:line-through;margin-bottom:4px}
+.price-main{font-family:'Space Grotesk',sans-serif;font-size:48px;font-weight:700;color:var(--gold);line-height:1;letter-spacing:-1.5px}
+.price-note{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5}
+.discount-tag{display:inline-block;font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;background:rgba(0,201,167,.12);border:1px solid rgba(0,201,167,.25);color:var(--teal);padding:3px 9px;border-radius:4px;margin-top:10px}
+.deliv-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.deliv-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted);line-height:1.55}
+.deliv-list li::before{content:'✓';color:var(--teal);font-size:10px;font-weight:800;flex-shrink:0;margin-top:3px}
+.a0-info-row{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px}
+.a0-info-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.a0-info-val{font-size:14px;font-weight:600;color:var(--white)}
+
+/* ── PACKAGES ── */
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+.pkg{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 24px;display:flex;flex-direction:column;transition:border-color .25s,transform .25s,box-shadow .25s,background .25s}
+.pkg:hover{border-color:var(--gold);transform:translateY(-8px);background:rgba(201,168,76,.06);box-shadow:0 22px 64px rgba(201,168,76,.25),0 0 0 1px rgba(201,168,76,.32)}
+.pkg.featured{border-color:var(--gold);background:linear-gradient(160deg,var(--surface),rgba(201,168,76,.04))}
+.pkg-eyebrow{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;opacity:.7}
+.pkg-name{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:4px}
+.pkg-tagline{font-size:12.5px;color:var(--teal);font-weight:600;margin-bottom:18px}
+.pkg-desc{font-size:13px;color:var(--muted);line-height:1.65;flex:1;padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:18px}
+.pkg-act-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.pkg-act-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.pkg-act-list li{font-size:12.5px;color:var(--white);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.pkg-act-list li::before{content:'✓';color:var(--teal);font-size:10px;font-weight:800;flex-shrink:0;margin-top:3px}
+.feat-badge{display:inline-block;font-size:8px;font-weight:800;letter-spacing:2px;text-transform:uppercase;background:rgba(201,168,76,.12);border:1px solid var(--bg2);color:var(--gold);padding:3px 8px;border-radius:3px;margin-bottom:10px}
+
+/* ── NOTE OPERATIVE ── */
+.notes-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+.note{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;display:flex;gap:14px;align-items:flex-start}
+.note-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.note h4{font-size:13.5px;font-weight:600;color:var(--white);margin-bottom:5px}
+.note p{font-size:12.5px;color:var(--muted);line-height:1.6}
+
+/* ── FOOTER ── */
+.footer-sec{min-height:auto !important;padding:60px !important}
+.contact-line{font-size:14px;color:var(--muted);margin-top:12px}
+.contact-line span{color:var(--white);font-weight:600}
+
+/* ── ANIMATIONS ── */
+.fi{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.fi.v{opacity:1;transform:translateY(0)}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:rgba(201,168,76,.2);border-radius:2px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{display:none}
+  main{margin-left:0}
+  section{padding:60px 20px 52px}
+  .g2,.g3,.a0-wrap,.pkg-grid,.notes-grid{grid-template-columns:1fr}
+  .burger{display:flex}
+  h1{font-size:clamp(28px,8vw,50px)}
+  h2{font-size:clamp(22px,7vw,40px)}
+}
+@media(max-width:480px){
+  section{padding:56px 16px 48px}
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR NAV -->
+<nav>
+  <div class="nl">
+    <div class="wm">AI <span>×</span> Ronin</div>
+    <div class="sub">Proposta di Servizio</div>
+  </div>
+  <div class="nls">
+    <a class="ni active" href="#overview"><span class="nn">01</span> Overview</a>
+    <a class="ni" href="#problema"><span class="nn">02</span> Il Problema</a>
+    <a class="ni" href="#team"><span class="nn">03</span> Il Team</a>
+    <a class="ni" href="#metodo"><span class="nn">04</span> Il Metodo</a>
+    <a class="ni" href="#assessment"><span class="nn">05</span> Assessment</a>
+    <a class="ni" href="#pacchetti"><span class="nn">06</span> Pacchetti</a>
+    <a class="ni" href="#note"><span class="nn">07</span> Note Operative</a>
+  </div>
+  <div class="nf"><span class="nd"></span> Confidenziale · 2026</div>
+</nav>
+
+<!-- BURGER (mobile) -->
+<button class="burger" id="burger" onclick="toggleMobileNav()" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- MOBILE NAV -->
+<nav class="mnav" id="mnav">
+  <div class="nl" style="padding:0 20px 24px">
+    <div class="wm">AI <span>×</span> Ronin</div>
+    <div class="sub">Proposta di Servizio</div>
+  </div>
+  <div class="nls">
+    <a class="ni active" href="#overview" onclick="closeMobileNav()"><span class="nn">01</span> Overview</a>
+    <a class="ni" href="#problema" onclick="closeMobileNav()"><span class="nn">02</span> Il Problema</a>
+    <a class="ni" href="#team" onclick="closeMobileNav()"><span class="nn">03</span> Il Team</a>
+    <a class="ni" href="#metodo" onclick="closeMobileNav()"><span class="nn">04</span> Il Metodo</a>
+    <a class="ni" href="#assessment" onclick="closeMobileNav()"><span class="nn">05</span> Assessment</a>
+    <a class="ni" href="#pacchetti" onclick="closeMobileNav()"><span class="nn">06</span> Pacchetti</a>
+    <a class="ni" href="#note" onclick="closeMobileNav()"><span class="nn">07</span> Note Operative</a>
+  </div>
+  <div class="nf" style="margin-top:auto"><span class="nd"></span> Confidenziale · 2026</div>
+</nav>
+
+<main>
+
+<!-- 01 OVERVIEW -->
+<section id="overview">
+  <div class="fi">
+    <div class="ey">01 · Overview</div>
+    <h1>Dati aziendali che<br/><em class="g">lavorano davvero</em> per te.</h1>
+    <div class="dv"></div>
+    <p class="lead">Aggreghiamo le tue fonti dati, le puliamo, le riconciliamo e costruiamo dashboard operative e predittive. Strumenti che le persone usano ogni giorno non solo per misurare, ma per agire in maniera strategica e coordinata.</p>
+  </div>
+  <div class="g3" style="margin-top:52px">
+    <div class="card fi" style="transition-delay:.1s">
+      <div class="ci">🔗</div>
+      <h3>Aggregazione fonti dati</h3>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">CRM, ERP, tool di marketing, database interni: tutte le fonti connesse in un unico ecosistema coerente.</p>
+    </div>
+    <div class="card fi" style="transition-delay:.2s">
+      <div class="ci">⚙️</div>
+      <h3>Automazione e API</h3>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">Processi ricorrenti automatizzati, skill AI, artefatti e connessioni con DB esistenti, senza intervento manuale.</p>
+    </div>
+    <div class="card fi" style="transition-delay:.3s">
+      <div class="ci">📊</div>
+      <h3>Dashboard operative e predittive</h3>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">Visualizzazioni costruite per chi decide: KPI in tempo reale, anomalie, previsioni, alerting automatico.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 IL PROBLEMA -->
+<section id="problema">
+  <div class="fi">
+    <div class="ey">02 · Il Problema</div>
+    <h2>I dati ci sono.<br/>Trasformarli in <em class="g">informazioni utili</em> è un'altra storia.</h2>
+    <div class="dv"></div>
+    <p class="lead">I sistemi aziendali parlano lingue diverse, i dati restano nei loro silos e ogni decisione richiede ore di lavoro manuale. L'AI può cambiare questa situazione, a patto di configurarla sul contesto specifico dell'azienda.</p>
+  </div>
+  <div class="g2" style="margin-top:44px">
+    <div class="card fi" style="transition-delay:.1s">
+      <div class="ci">🗃️</div>
+      <h3>Dati frammentati</h3>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">CRM, ERP, fogli Excel, tool di marketing: ognuno con la sua logica, nessuna visione unificata. Ogni report diventa un progetto.</p>
+    </div>
+    <div class="card fi" style="transition-delay:.15s">
+      <div class="ci">🔄</div>
+      <h3>Riconciliazione manuale</h3>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">I team perdono ore ogni settimana ad allineare numeri tra sistemi diversi. Il processo è lento, costoso e soggetto a errori sistematici.</p>
+    </div>
+    <div class="card fi" style="transition-delay:.2s">
+      <div class="ci">📊</div>
+      <h3>Dashboard che non aiutano</h3>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">Tanti grafici, poche decisioni. Gli strumenti esistenti mostrano il passato senza indicare dove guardare o cosa fare.</p>
+    </div>
+    <div class="card fi" style="transition-delay:.25s">
+      <div class="ci">🤖</div>
+      <h3>Processi ancora manuali</h3>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">Le attività ricorrenti vengono eseguite a mano. Mancano API, workflow e automazioni che le gestiscano in autonomia, liberando tempo al team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 IL TEAM -->
+<section id="team">
+  <div class="fi">
+    <div class="ey">03 · Il Team</div>
+    <h2>Tre specializzazioni,<br/>un <em class="g">progetto coordinato.</em></h2>
+    <div class="dv"></div>
+    <p class="lead">Strategia dati, integrazione martech e implementazione AI operativa: tre competenze distinte che lavorano insieme su ogni fase del progetto, con responsabilità chiare e un unico punto di riferimento per il cliente.</p>
+  </div>
+  <div class="g3" style="margin-top:44px">
+    <div class="rc mp fi" style="transition-delay:.1s">
+      <div class="role-eyebrow">Martech Partner</div>
+      <h3>Orchestrazione e connessioni</h3>
+      <p>Supervisiona l'integrazione tra i sistemi esistenti e governa l'intero ecosistema dati. È il punto di riferimento per la relazione con il cliente.</p>
+      <ul>
+        <li>Connessione CRM, CDP, piattaforme SaaS</li>
+        <li>Governance dell'ecosistema dati</li>
+        <li>Coordinamento delle fasi di progetto</li>
+        <li>Interfaccia con il team cliente</li>
+      </ul>
+    </div>
+    <div class="rc ds fi" style="transition-delay:.2s">
+      <div class="role-eyebrow">Data Strategy</div>
+      <h3>Modellazione e qualità del dato</h3>
+      <p>Definisce l'architettura dati, i processi di pulizia e riconciliazione, e le metriche chiave su cui costruire dashboard e modelli predittivi.</p>
+      <ul>
+        <li>Architettura e modellazione dati</li>
+        <li>Processi di pulizia e normalizzazione</li>
+        <li>Definizione KPI e metriche di business</li>
+        <li>Design dei modelli predittivi</li>
+      </ul>
+    </div>
+    <div class="rc ai fi" style="transition-delay:.3s">
+      <div class="role-eyebrow">AI Operativa</div>
+      <h3>Implementazione e automazione</h3>
+      <p>Costruisce e mantiene API, skill AI, artefatti e workflow automatizzati per i processi ricorrenti, con attenzione alla scalabilità nel tempo.</p>
+      <ul>
+        <li>Sviluppo API e skill AI custom</li>
+        <li>Connessione con DB esistenti</li>
+        <li>Automazione processi ricorrenti</li>
+        <li>Build dashboard operative e predittive</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 04 IL METODO -->
+<section id="metodo">
+  <div class="fi">
+    <div class="ey">04 · Il Metodo</div>
+    <h2>Prima si capisce la situazione.<br/><em class="g">Poi si costruisce.</em></h2>
+    <div class="dv"></div>
+    <p class="lead">Ogni progetto parte da un assessment rigoroso. Solo dopo aver mappato l'ecosistema dati, i flussi e i gap reali, proponiamo il package più adatto. Il contesto del cliente guida ogni scelta.</p>
+  </div>
+  <div class="steps-wrap fi" style="transition-delay:.15s">
+    <div class="step-item">
+      <div class="step-num-wrap"><div class="step-num">0</div></div>
+      <div class="step-body">
+        <h4>Assessment: Fase 0</h4>
+        <p>Mappatura completa delle fonti dati, dei sistemi attivi e delle priorità di business. Il team analizza l'ecosistema, intervista i referenti chiave e valuta la maturità AI dell'organizzazione.</p>
+        <div class="step-tags">
+          <span class="stag">Analisi sistemi</span>
+          <span class="stag">Interviste stakeholder</span>
+          <span class="stag">Gap analysis</span>
+          <span class="stag">Maturità AI</span>
+        </div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num-wrap"><div class="step-num">1</div></div>
+      <div class="step-body">
+        <h4>Findings e raccomandazione</h4>
+        <p>Al termine dell'assessment viene consegnato un documento con i gap identificati, le opportunità AI a maggiore impatto e la raccomandazione del package più adeguato alla situazione specifica.</p>
+        <div class="step-tags">
+          <span class="stag">Report findings</span>
+          <span class="stag">Priorità di intervento</span>
+          <span class="stag">Roadmap consigliata</span>
+        </div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num-wrap"><div class="step-num">2</div></div>
+      <div class="step-body">
+        <h4>Setup e implementazione</h4>
+        <p>Connessioni, pipeline dati, processi di pulizia, automazioni e prime integrazioni API, costruiti sul perimetro definito nella fase precedente, con rilasci progressivi e verificabili.</p>
+        <div class="step-tags">
+          <span class="stag">Connessioni dati</span>
+          <span class="stag">Pipeline pulizia</span>
+          <span class="stag">API e automazioni</span>
+          <span class="stag">Rilasci progressivi</span>
+        </div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num-wrap"><div class="step-num">3</div></div>
+      <div class="step-body">
+        <h4>Go Live e trasferimento</h4>
+        <p>Dashboard operative e predittive attive, team formato sull'utilizzo degli strumenti, processi ricorrenti automatizzati e documentazione tecnica consegnata.</p>
+        <div class="step-tags">
+          <span class="stag">Dashboard attive</span>
+          <span class="stag">Formazione team</span>
+          <span class="stag">Documentazione</span>
+          <span class="stag">Handover</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 ASSESSMENT -->
+<section id="assessment">
+  <div class="fi">
+    <div class="ey">05 · Assessment</div>
+    <h2>Da qui si parte, <em class="g">sempre.</em></h2>
+    <div class="dv"></div>
+    <p class="lead">Il package giusto dipende da quello che emerge durante l'analisi. Investire senza prima capire dove si trovano i problemi veri è il modo più rapido per sprecare budget e tempo.</p>
+  </div>
+  <div class="a0-wrap fi" style="transition-delay:.15s">
+    <div class="a0-left">
+      <div class="ey" style="margin-bottom:20px">Cosa produciamo</div>
+      <ul class="deliv-list">
+        <li>Mappa completa delle fonti dati e dei sistemi attivi</li>
+        <li>Analisi dei gap: qualità del dato, integrazioni mancanti, silos</li>
+        <li>Identificazione dei processi ricorrenti automatizzabili</li>
+        <li>Valutazione delle opportunità AI a maggiore impatto sul business</li>
+        <li>Raccomandazione del package più adeguato (Basic / Intermediate / Advanced)</li>
+        <li>Roadmap operativa dettagliata per la fase successiva</li>
+        <li>Documento di findings scritto e consegnato al cliente</li>
+      </ul>
+      <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--border)">
+        <div class="ey" style="margin-bottom:16px">Come lavoriamo</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7">Il team affianca il cliente in sessioni di analisi calendarizzate con i referenti interni, riducendo al minimo il carico operativo lato cliente.</p>
+      </div>
+    </div>
+    <div class="a0-right">
+      <div class="a0-price-box">
+        <div class="price-main">€ 2.000</div>
+        <div class="price-note">Investimento per la Fase 0 · IVA esclusa</div>
+        <div class="discount-tag">✦ Prezzo di ingresso scontato</div>
+      </div>
+      <div class="a0-info-row">
+        <div class="a0-info-label">Durata</div>
+        <div class="a0-info-val">2 o 3 settimane</div>
+      </div>
+      <div class="a0-info-row">
+        <div class="a0-info-label">Deliverable finale</div>
+        <div class="a0-info-val">Documento findings + roadmap</div>
+      </div>
+      <div class="a0-info-row">
+        <div class="a0-info-label">Prerequisito</div>
+        <div class="a0-info-val">Obbligatorio per tutti i pacchetti</div>
+      </div>
+      <div style="background:rgba(0,201,167,.04);border:1px solid rgba(0,201,167,.15);border-radius:10px;padding:16px 18px">
+        <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:6px">Nota</div>
+        <p style="font-size:12.5px;color:var(--muted);line-height:1.6">Il costo dell'assessment viene scalato dal totale del package selezionato, se l'engagement prosegue entro 60 giorni dalla consegna dei findings.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 PACCHETTI -->
+<section id="pacchetti">
+  <div class="fi">
+    <div class="ey">06 · Pacchetti</div>
+    <h2>Tre livelli di intervento,<br/>calibrati sui <em class="g">findings.</em></h2>
+    <div class="dv"></div>
+    <p class="lead">Il package viene scelto dopo la Fase 0, sulla base di quello che emerge dall'analisi. Le attività indicate sono indicative e vengono adattate alla situazione specifica del cliente.</p>
+  </div>
+  <div class="pkg-grid fi" style="transition-delay:.15s">
+
+    <!-- BASIC -->
+    <div class="pkg">
+      <div class="pkg-eyebrow">Package 01</div>
+      <div class="pkg-name">Basic</div>
+      <div class="pkg-tagline">Foundation: prime integrazioni e dashboard operative</div>
+      <div class="pkg-desc">
+        Indicato per aziende che partono da zero o che hanno bisogno di mettere ordine su 1–2 fonti dati prioritarie prima di espandere. Focus su quick win operativi e visibilità immediata sui KPI essenziali.
+      </div>
+      <div class="pkg-act-label">Attività incluse</div>
+      <ul class="pkg-act-list">
+        <li>Connessione e integrazione di una o due fonti dati prioritarie</li>
+        <li>Pipeline di pulizia e normalizzazione dati</li>
+        <li>Definizione e tracciamento dei KPI operativi principali</li>
+        <li>Dashboard operativa su misura</li>
+        <li>Documentazione tecnica e sessione di handover</li>
+      </ul>
+    </div>
+
+    <!-- INTERMEDIATE -->
+    <div class="pkg featured">
+      <div class="feat-badge">✦ Più richiesto</div>
+      <div class="pkg-eyebrow">Package 02</div>
+      <div class="pkg-name">Intermediate</div>
+      <div class="pkg-tagline">Growth: multi-source, automazioni e primo modello predittivo</div>
+      <div class="pkg-desc">
+        Per aziende che hanno già qualche dato organizzato ma vogliono fare il salto: connettere più sistemi, eliminare la riconciliazione manuale e cominciare a guardare avanti con modelli predittivi.
+      </div>
+      <div class="pkg-act-label">Attività incluse</div>
+      <ul class="pkg-act-list">
+        <li>Connessione e riconciliazione automatica di 3 o più fonti dati</li>
+        <li>Pipeline di qualità dato su base ricorrente</li>
+        <li>Sviluppo API e skill AI per processi aziendali ripetitivi</li>
+        <li>Connessione con database esistente</li>
+        <li>Dashboard operativa + primo modello predittivo</li>
+        <li>Sistema di alerting automatico su anomalie</li>
+        <li>Formazione team e documentazione estesa</li>
+      </ul>
+    </div>
+
+    <!-- ADVANCED -->
+    <div class="pkg">
+      <div class="pkg-eyebrow">Package 03</div>
+      <div class="pkg-name">Advanced</div>
+      <div class="pkg-tagline">Intelligence: ecosistema completo e AI predittiva</div>
+      <div class="pkg-desc">
+        Per organizzazioni che vogliono costruire un vantaggio competitivo strutturale sui dati: stack completo, modelli predittivi custom, governance del dato e automazione continua di tutti i processi ricorrenti.
+      </div>
+      <div class="pkg-act-label">Attività incluse</div>
+      <ul class="pkg-act-list">
+        <li>Integrazione completa di tutte le fonti dati aziendali</li>
+        <li>Modelli predittivi custom su metriche di business chiave</li>
+        <li>Suite API e artefatti AI per processi ricorrenti</li>
+        <li>Dashboard operativa e predittiva con aggiornamento real-time</li>
+        <li>Governance del dato e data quality monitoring continuo</li>
+        <li>Alerting avanzato e escalation automatica</li>
+        <li>Training approfondito al team interno</li>
+        <li>Documentazione tecnica completa e piano di manutenzione</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 07 NOTE OPERATIVE -->
+<section id="note">
+  <div class="fi">
+    <div class="ey">07 · Note Operative</div>
+    <h2>Cose che vale la pena <em class="g">sapere.</em></h2>
+    <div class="dv"></div>
+  </div>
+  <div class="notes-grid fi" style="transition-delay:.1s">
+    <div class="note">
+      <div class="note-icon">📋</div>
+      <div>
+        <h4>L'assessment è il punto di partenza</h4>
+        <p>La Fase 0 è prerequisito per qualsiasi package. Serve a evitare di costruire la soluzione sbagliata; garantisce che le risorse vengano investite dove hanno più impatto.</p>
+      </div>
+    </div>
+    <div class="note">
+      <div class="note-icon">🔄</div>
+      <div>
+        <h4>Le attività sono adattabili</h4>
+        <p>Le attività indicate per ogni package sono orientative. Il perimetro definitivo viene concordato dopo i findings dell'assessment, in base alle priorità emerse.</p>
+      </div>
+    </div>
+    <div class="note">
+      <div class="note-icon">📅</div>
+      <div>
+        <h4>Tempistiche indicative</h4>
+        <p>Fase 0: 2 o 3 settimane. Basic: circa 6 settimane. Intermediate: circa 3 mesi. Advanced: circa 5 o 6 mesi. I tempi variano in base alla disponibilità del team cliente e alla complessità dei sistemi.</p>
+      </div>
+    </div>
+    <div class="note">
+      <div class="note-icon">🔒</div>
+      <div>
+        <h4>Dati e riservatezza</h4>
+        <p>Tutte le attività avvengono nel rispetto del GDPR. Nessun dato aziendale viene utilizzato per addestrare modelli AI di terze parti. NDA disponibile su richiesta prima dell'assessment.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<script>
+// ── MOBILE NAV ──
+function toggleMobileNav(){
+  document.getElementById('burger').classList.toggle('open');
+  document.getElementById('mnav').classList.toggle('open');
+}
+function closeMobileNav(){
+  document.getElementById('burger').classList.remove('open');
+  document.getElementById('mnav').classList.remove('open');
+}
+
+// ── SCROLL SPY ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.ni');
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(l=>l.classList.remove('active'));
+      const active = document.querySelector('.ni[href="#'+e.target.id+'"]');
+      if(active) active.classList.add('active');
+    }
+  });
+},{threshold:.3});
+sections.forEach(s=>observer.observe(s));
+
+// ── FADE IN ──
+const fader = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')});
+},{threshold:.12});
+document.querySelectorAll('.fi').forEach(el=>fader.observe(el));
+</script>
+</body>
+</html>
