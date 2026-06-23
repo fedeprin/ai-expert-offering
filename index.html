@@ -109,8 +109,24 @@ em.g{color:var(--gold);font-style:normal}
 .a0-info-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
 .a0-info-val{font-size:14px;font-weight:600;color:var(--white)}
 
+/* ── PROBLEM / SOLUTION CARDS ── */
+.ps-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px}
+.ps-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.ps-top{padding:22px 24px 18px}
+.ps-top-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.ps-top-icon{font-size:18px;margin-bottom:8px}
+.ps-top h4{font-size:14px;font-weight:600;color:rgba(245,245,247,.65);margin-bottom:6px;letter-spacing:-.2px}
+.ps-top p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.ps-divider{padding:8px 24px;border-top:1px solid var(--border);border-bottom:1px solid rgba(201,168,76,.15);background:rgba(201,168,76,.03);font-size:9px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;display:flex;align-items:center;gap:8px}
+.ps-divider::before{content:'→';font-size:12px}
+.ps-bottom{padding:18px 24px 22px;background:rgba(201,168,76,.03)}
+.ps-bottom-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.ps-bottom-label::before{content:'✦';font-size:8px}
+.ps-bottom h4{font-size:14px;font-weight:600;color:var(--white);margin-bottom:6px;letter-spacing:-.2px}
+.ps-bottom p{font-size:12.5px;color:var(--muted);line-height:1.6}
+
 /* ── PACKAGES ── */
-.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+.pkg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:44px}
 .pkg{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 24px;display:flex;flex-direction:column;transition:border-color .25s,transform .25s,box-shadow .25s,background .25s}
 .pkg:hover{border-color:var(--gold);transform:translateY(-8px);background:rgba(201,168,76,.06);box-shadow:0 22px 64px rgba(201,168,76,.25),0 0 0 1px rgba(201,168,76,.32)}
 .pkg.featured{border-color:var(--gold);background:linear-gradient(160deg,var(--surface),rgba(201,168,76,.04))}
@@ -187,7 +203,7 @@ em.g{color:var(--gold);font-style:normal}
   nav{display:none}
   main{margin-left:0}
   section{padding:60px 20px 52px}
-  .g2,.g3,.a0-wrap,.pkg-grid,.notes-grid,.plat-grid,.form-grid,.cap-row{grid-template-columns:1fr}
+  .g2,.g3,.a0-wrap,.pkg-grid,.notes-grid,.plat-grid,.form-grid,.cap-row,.ps-grid{grid-template-columns:1fr}
   .burger{display:flex}
   h1{font-size:clamp(28px,8vw,50px)}
   h2{font-size:clamp(22px,7vw,40px)}
@@ -206,15 +222,14 @@ em.g{color:var(--gold);font-style:normal}
     <div class="sub">Proposta di Servizio</div>
   </div>
   <div class="nls">
-    <a class="ni active" href="#overview"><span class="nn">01</span> Overview</a>
-    <a class="ni" href="#problema"><span class="nn">02</span> Il Problema</a>
+    <a class="ni active" href="#overview"><span class="nn">01</span> Il Contesto</a>
+    <a class="ni" href="#piattaforme"><span class="nn">02</span> Piattaforme AI</a>
     <a class="ni" href="#team"><span class="nn">03</span> Il Team</a>
-    <a class="ni" href="#piattaforme"><span class="nn">04</span> Piattaforme AI</a>
-    <a class="ni" href="#metodo"><span class="nn">05</span> Il Metodo</a>
-    <a class="ni" href="#assessment"><span class="nn">06</span> Assessment</a>
-    <a class="ni" href="#pacchetti"><span class="nn">07</span> Pacchetti</a>
-    <a class="ni" href="#formazione"><span class="nn">08</span> Formazione</a>
-    <a class="ni" href="#note"><span class="nn">09</span> Note Operative</a>
+    <a class="ni" href="#metodologia"><span class="nn">04</span> La Metodologia</a>
+    <a class="ni" href="#assessment"><span class="nn">05</span> Assessment</a>
+    <a class="ni" href="#pacchetti"><span class="nn">06</span> Pacchetti</a>
+    <a class="ni" href="#formazione"><span class="nn">07</span> Formazione</a>
+    <a class="ni" href="#note"><span class="nn">08</span> Note Operative</a>
   </div>
   <div class="nf"><span class="nd"></span> Confidenziale · 2026</div>
 </nav>
@@ -231,15 +246,14 @@ em.g{color:var(--gold);font-style:normal}
     <div class="sub">Proposta di Servizio</div>
   </div>
   <div class="nls">
-    <a class="ni active" href="#overview" onclick="closeMobileNav()"><span class="nn">01</span> Overview</a>
-    <a class="ni" href="#problema" onclick="closeMobileNav()"><span class="nn">02</span> Il Problema</a>
+    <a class="ni active" href="#overview" onclick="closeMobileNav()"><span class="nn">01</span> Il Contesto</a>
+    <a class="ni" href="#piattaforme" onclick="closeMobileNav()"><span class="nn">02</span> Piattaforme AI</a>
     <a class="ni" href="#team" onclick="closeMobileNav()"><span class="nn">03</span> Il Team</a>
-    <a class="ni" href="#piattaforme" onclick="closeMobileNav()"><span class="nn">04</span> Piattaforme AI</a>
-    <a class="ni" href="#metodo" onclick="closeMobileNav()"><span class="nn">05</span> Il Metodo</a>
-    <a class="ni" href="#assessment" onclick="closeMobileNav()"><span class="nn">06</span> Assessment</a>
-    <a class="ni" href="#pacchetti" onclick="closeMobileNav()"><span class="nn">07</span> Pacchetti</a>
-    <a class="ni" href="#formazione" onclick="closeMobileNav()"><span class="nn">08</span> Formazione</a>
-    <a class="ni" href="#note" onclick="closeMobileNav()"><span class="nn">09</span> Note Operative</a>
+    <a class="ni" href="#metodologia" onclick="closeMobileNav()"><span class="nn">04</span> La Metodologia</a>
+    <a class="ni" href="#assessment" onclick="closeMobileNav()"><span class="nn">05</span> Assessment</a>
+    <a class="ni" href="#pacchetti" onclick="closeMobileNav()"><span class="nn">06</span> Pacchetti</a>
+    <a class="ni" href="#formazione" onclick="closeMobileNav()"><span class="nn">07</span> Formazione</a>
+    <a class="ni" href="#note" onclick="closeMobileNav()"><span class="nn">08</span> Note Operative</a>
   </div>
   <div class="nf" style="margin-top:auto"><span class="nd"></span> Confidenziale · 2026</div>
 </nav>
@@ -249,112 +263,79 @@ em.g{color:var(--gold);font-style:normal}
 <!-- 01 OVERVIEW -->
 <section id="overview">
   <div class="fi">
-    <div class="ey">01 · Overview</div>
-    <h1>Dati aziendali che<br/><em class="g">lavorano davvero</em> per te.</h1>
+    <div class="ey">01 · Il Contesto</div>
+    <h1>Da un patrimonio dati frammentato a un <em class="g">vantaggio competitivo</em> misurabile.</h1>
     <div class="dv"></div>
-    <p class="lead">Aggreghiamo le tue fonti dati, le puliamo, le riconciliamo e costruiamo dashboard operative e predittive. Strumenti che le persone usano ogni giorno non solo per misurare, ma per agire in maniera strategica e coordinata.</p>
+    <p class="lead">Le organizzazioni producono più dati che mai, ma secondo le principali analisi di settore oltre il 70% di questi dati non contribuisce ad alcuna decisione operativa. CRM, ERP, piattaforme marketing e strumenti analytics operano in silos separati: il risultato è un frazionamento delle informazioni, una mancanza di visione unificata e una perdita di valore. Dashboard che fotografano il passato, numeri che non si riconciliano tra sistemi, team che perdono ore ogni settimana ad allineare report prodotti da fonti diverse.</p>
+    <p style="margin-top:20px;font-size:16px;color:var(--muted);line-height:1.75">L'intelligenza artificiale ha ridefinito il perimetro del possibile. Per la prima volta è possibile aggregare fonti eterogenee, normalizzare il dato e costruire strati interpretativi senza sostituire l'infrastruttura esistente, ma lavorando sopra di essa. Approcci che richiedevano team dedicati e investimenti infrastrutturali significativi sono oggi implementabili in modo modulare e progressivo, compatibili con i sistemi già in essere.</p>
+    <p style="margin-top:20px;font-size:16px;color:var(--white);line-height:1.75;font-weight:500">L'obiettivo è trasformare il dato descrittivo in insight attivo, e l'insight in decisione.</p>
   </div>
-  <div class="g3" style="margin-top:52px">
-    <div class="card fi" style="transition-delay:.1s">
-      <div class="ci">🔗</div>
-      <h3>Aggregazione fonti dati</h3>
-      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">CRM, ERP, tool di marketing, database interni: tutte le fonti connesse in un unico ecosistema coerente.</p>
+  <div class="ps-grid fi" style="transition-delay:.1s">
+
+    <div class="ps-card">
+      <div class="ps-top">
+        <div class="ps-top-label">Il problema</div>
+        <div class="ps-top-icon">🗃️</div>
+        <h4>Dati frammentati tra sistemi diversi</h4>
+        <p>CRM, ERP, fogli Excel, piattaforme marketing: ognuno con la sua logica, nessuna visione condivisa. Ogni report richiede ore di lavoro manuale.</p>
+      </div>
+      <div class="ps-divider">La risposta</div>
+      <div class="ps-bottom">
+        <h4>Ecosistema dati unificato</h4>
+        <p>Tutte le fonti aziendali connesse in un'unica pipeline coerente, aggiornata in automatico su base ricorrente.</p>
+      </div>
     </div>
-    <div class="card fi" style="transition-delay:.2s">
-      <div class="ci">⚙️</div>
-      <h3>Automazione e API</h3>
-      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">Processi ricorrenti automatizzati, skill AI, artefatti e connessioni con DB esistenti, senza intervento manuale.</p>
+
+    <div class="ps-card">
+      <div class="ps-top">
+        <div class="ps-top-label">Il problema</div>
+        <div class="ps-top-icon">🔄</div>
+        <h4>Riconciliazione manuale e sistematica</h4>
+        <p>Il team perde ore ogni settimana ad allineare numeri tra sistemi diversi. Un processo lento, costoso e soggetto a errori difficili da tracciare.</p>
+      </div>
+      <div class="ps-divider">La risposta</div>
+      <div class="ps-bottom">
+        <h4>Pipeline dati automatizzata</h4>
+        <p>Processi di pulizia, normalizzazione e riconciliazione eseguiti in automatico, con log di errore e alerting su anomalie.</p>
+      </div>
     </div>
-    <div class="card fi" style="transition-delay:.3s">
-      <div class="ci">📊</div>
-      <h3>Dashboard operative e predittive</h3>
-      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">Visualizzazioni costruite per chi decide: KPI in tempo reale, anomalie, previsioni, alerting automatico.</p>
+
+    <div class="ps-card">
+      <div class="ps-top">
+        <div class="ps-top-label">Il problema</div>
+        <div class="ps-top-icon">📊</div>
+        <h4>Dashboard che descrivono, non orientano</h4>
+        <p>Gli strumenti esistenti fotografano il passato. Tanti grafici, poche indicazioni concrete su dove intervenire e cosa fare nel presente.</p>
+      </div>
+      <div class="ps-divider">La risposta</div>
+      <div class="ps-bottom">
+        <h4>Intelligence predittiva e actionable</h4>
+        <p>KPI in tempo reale, anomalie rilevate automaticamente, modelli predittivi che anticipano le tendenze prima che diventino problemi.</p>
+      </div>
     </div>
+
+    <div class="ps-card">
+      <div class="ps-top">
+        <div class="ps-top-label">Il problema</div>
+        <div class="ps-top-icon">🤖</div>
+        <h4>Processi ricorrenti eseguiti a mano</h4>
+        <p>Attività ad alto volume ancora gestite manualmente, con costi operativi elevati e rischio di errore proporzionale alla frequenza.</p>
+      </div>
+      <div class="ps-divider">La risposta</div>
+      <div class="ps-bottom">
+        <h4>Workflow AI-driven in autonomia</h4>
+        <p>API, skill AI e agenti configurati per gestire i flussi ricorrenti senza intervento umano, con supervisione e log completo.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- 02 IL PROBLEMA -->
-<section id="problema">
-  <div class="fi">
-    <div class="ey">02 · Il Problema</div>
-    <h2>I dati ci sono.<br/>Trasformarli in <em class="g">informazioni utili</em> è un'altra storia.</h2>
-    <div class="dv"></div>
-    <p class="lead">I sistemi aziendali parlano lingue diverse, i dati restano nei loro silos e ogni decisione richiede ore di lavoro manuale. L'AI può cambiare questa situazione, a patto di configurarla sul contesto specifico dell'azienda.</p>
-  </div>
-  <div class="g2" style="margin-top:44px">
-    <div class="card fi" style="transition-delay:.1s">
-      <div class="ci">🗃️</div>
-      <h3>Dati frammentati</h3>
-      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">CRM, ERP, fogli Excel, tool di marketing: ognuno con la sua logica, nessuna visione unificata. Ogni report diventa un progetto.</p>
-    </div>
-    <div class="card fi" style="transition-delay:.15s">
-      <div class="ci">🔄</div>
-      <h3>Riconciliazione manuale</h3>
-      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">I team perdono ore ogni settimana ad allineare numeri tra sistemi diversi. Il processo è lento, costoso e soggetto a errori sistematici.</p>
-    </div>
-    <div class="card fi" style="transition-delay:.2s">
-      <div class="ci">📊</div>
-      <h3>Dashboard che non aiutano</h3>
-      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">Tanti grafici, poche decisioni. Gli strumenti esistenti mostrano il passato senza indicare dove guardare o cosa fare.</p>
-    </div>
-    <div class="card fi" style="transition-delay:.25s">
-      <div class="ci">🤖</div>
-      <h3>Processi ancora manuali</h3>
-      <p style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.65">Le attività ricorrenti vengono eseguite a mano. Mancano API, workflow e automazioni che le gestiscano in autonomia, liberando tempo al team.</p>
-    </div>
-  </div>
-</section>
-
-<!-- 03 IL TEAM -->
-<section id="team">
-  <div class="fi">
-    <div class="ey">03 · Il Team</div>
-    <h2>Tre specializzazioni,<br/>un <em class="g">progetto coordinato.</em></h2>
-    <div class="dv"></div>
-    <p class="lead">Strategia dati, integrazione martech e implementazione AI operativa: tre competenze distinte che lavorano insieme su ogni fase del progetto, con responsabilità chiare e un unico punto di riferimento per il cliente.</p>
-  </div>
-  <div class="g3" style="margin-top:44px">
-    <div class="rc mp fi" style="transition-delay:.1s">
-      <div class="role-eyebrow">Martech Partner</div>
-      <h3>Orchestrazione e connessioni</h3>
-      <p>Supervisiona l'integrazione tra i sistemi esistenti e governa l'intero ecosistema dati. È il punto di riferimento per la relazione con il cliente.</p>
-      <ul>
-        <li>Connessione CRM, CDP, piattaforme SaaS</li>
-        <li>Governance dell'ecosistema dati</li>
-        <li>Coordinamento delle fasi di progetto</li>
-        <li>Interfaccia con il team cliente</li>
-      </ul>
-    </div>
-    <div class="rc ds fi" style="transition-delay:.2s">
-      <div class="role-eyebrow">Data Strategy</div>
-      <h3>Modellazione e qualità del dato</h3>
-      <p>Definisce l'architettura dati, i processi di pulizia e riconciliazione, e le metriche chiave su cui costruire dashboard e modelli predittivi.</p>
-      <ul>
-        <li>Architettura e modellazione dati</li>
-        <li>Processi di pulizia e normalizzazione</li>
-        <li>Definizione KPI e metriche di business</li>
-        <li>Design dei modelli predittivi</li>
-      </ul>
-    </div>
-    <div class="rc ai fi" style="transition-delay:.3s">
-      <div class="role-eyebrow">AI Operativa</div>
-      <h3>Implementazione e automazione</h3>
-      <p>Costruisce e mantiene API, skill AI, artefatti e workflow automatizzati per i processi ricorrenti, con attenzione alla scalabilità nel tempo.</p>
-      <ul>
-        <li>Sviluppo API e skill AI custom</li>
-        <li>Connessione con DB esistenti</li>
-        <li>Automazione processi ricorrenti</li>
-        <li>Build dashboard operative e predittive</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- 04 PIATTAFORME AI -->
+<!-- 02 PIATTAFORME AI -->
 <section id="piattaforme">
   <div class="fi">
-    <div class="ey">04 · Piattaforme AI</div>
-    <h2>L'AI che trasforma i dati<br/>in <em class="g">decisioni concrete.</em></h2>
+    <div class="ey">02 · Piattaforme AI</div>
+    <h2>L'intelligenza artificiale<br/>come <em class="g">infrastruttura abilitante.</em></h2>
     <div class="dv"></div>
     <p class="lead">Aggregare e pulire i dati è il punto di partenza. Il passo successivo è usare l'AI per renderli actionable: automatizzare interpretazioni, generare insight in linguaggio naturale, costruire agenti che monitorano, avvisano e agiscono in autonomia.</p>
   </div>
@@ -469,11 +450,56 @@ em.g{color:var(--gold);font-style:normal}
   </div>
 </section>
 
-<!-- 05 IL METODO -->
-<section id="metodo">
+<!-- 03 IL TEAM -->
+<section id="team">
   <div class="fi">
-    <div class="ey">05 · Il Metodo</div>
-    <h2>Prima si capisce la situazione.<br/><em class="g">Poi si costruisce.</em></h2>
+    <div class="ey">03 · Il Team</div>
+    <h2>Un team strutturato per garantire la <em class="g">massima integrazione</em>.</h2>
+    <div class="dv"></div>
+    <p class="lead">Strategia dati, integrazione martech e implementazione AI operativa: il nostro team di lavoro offre tre competenze distinte che lavorano insieme su ogni fase del progetto, con responsabilità chiare e un unico punto di riferimento per il cliente.</p>
+  </div>
+  <div class="g3" style="margin-top:44px">
+    <div class="rc mp fi" style="transition-delay:.1s">
+      <div class="role-eyebrow">Martech Partner</div>
+      <h3>Orchestrazione e connessioni</h3>
+      <p>Supervisiona l'integrazione tra i sistemi esistenti e governa l'intero ecosistema dati. È il punto di riferimento per la relazione con il cliente.</p>
+      <ul>
+        <li>Connessione CRM, CDP, piattaforme SaaS</li>
+        <li>Governance dell'ecosistema dati</li>
+        <li>Coordinamento delle fasi di progetto</li>
+        <li>Interfaccia con il team cliente</li>
+      </ul>
+    </div>
+    <div class="rc ds fi" style="transition-delay:.2s">
+      <div class="role-eyebrow">Data Strategist</div>
+      <h3>Modellazione e qualità del dato</h3>
+      <p>Definisce l'architettura dati, i processi di pulizia e riconciliazione, e le metriche chiave su cui costruire dashboard e modelli predittivi.</p>
+      <ul>
+        <li>Architettura e modellazione dati</li>
+        <li>Processi di pulizia e normalizzazione</li>
+        <li>Definizione KPI e metriche di business</li>
+        <li>Design dei modelli predittivi</li>
+      </ul>
+    </div>
+    <div class="rc ai fi" style="transition-delay:.3s">
+      <div class="role-eyebrow">AI Expert</div>
+      <h3>Implementazione e automazione</h3>
+      <p>Costruisce e mantiene API, skill AI, artefatti e workflow automatizzati per i processi ricorrenti, con attenzione alla scalabilità nel tempo.</p>
+      <ul>
+        <li>Sviluppo API e skill AI custom</li>
+        <li>Connessione con DB esistenti</li>
+        <li>Automazione processi ricorrenti</li>
+        <li>Build dashboard operative e predittive</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 04 LA METODOLOGIA -->
+<section id="metodologia">
+  <div class="fi">
+    <div class="ey">04 · La Metodologia</div>
+    <h2>Un <em class="g">approccio diagnostico</em> che guida tutte le fasi del progetto.</h2>
     <div class="dv"></div>
     <p class="lead">Ogni progetto parte da un assessment rigoroso. Solo dopo aver mappato l'ecosistema dati, i flussi e i gap reali, proponiamo il package più adatto. Il contesto del cliente guida ogni scelta.</p>
   </div>
@@ -494,7 +520,7 @@ em.g{color:var(--gold);font-style:normal}
     <div class="step-item">
       <div class="step-num-wrap"><div class="step-num">1</div></div>
       <div class="step-body">
-        <h4>Findings e raccomandazione</h4>
+        <h4>Evidenze e raccomandazioni</h4>
         <p>Al termine dell'assessment viene consegnato un documento con i gap identificati, le opportunità AI a maggiore impatto e la raccomandazione del package più adeguato alla situazione specifica.</p>
         <div class="step-tags">
           <span class="stag">Report findings</span>
@@ -519,7 +545,7 @@ em.g{color:var(--gold);font-style:normal}
     <div class="step-item">
       <div class="step-num-wrap"><div class="step-num">3</div></div>
       <div class="step-body">
-        <h4>Go Live e trasferimento</h4>
+        <h4>Go Live e trasferimento competenze</h4>
         <p>Dashboard operative e predittive attive, team formato sull'utilizzo degli strumenti, processi ricorrenti automatizzati e documentazione tecnica consegnata.</p>
         <div class="step-tags">
           <span class="stag">Dashboard attive</span>
@@ -535,10 +561,10 @@ em.g{color:var(--gold);font-style:normal}
 <!-- 05 ASSESSMENT -->
 <section id="assessment">
   <div class="fi">
-    <div class="ey">06 · Assessment</div>
-    <h2>Da qui si parte, <em class="g">sempre.</em></h2>
+    <div class="ey">05 · Assessment</div>
+    <h2>L'assessment iniziale rappresenta una <em class="g">milestone fondamentale</em> per la definizione dei next steps.</h2>
     <div class="dv"></div>
-    <p class="lead">Il package giusto dipende da quello che emerge durante l'analisi. Investire senza prima capire dove si trovano i problemi veri è il modo più rapido per sprecare budget e tempo.</p>
+    <p class="lead">Per identificare le soluzioni più adatte per strutturare le attività, è fondamentale partire da quello che emerge durante l'analisi. L'investimento iniziale consente di ridurre i rischi e ottimizzare l'outcome del progetto.</p>
   </div>
   <div class="a0-wrap fi" style="transition-delay:.15s">
     <div class="a0-left">
@@ -586,83 +612,102 @@ em.g{color:var(--gold);font-style:normal}
 <!-- 06 PACCHETTI -->
 <section id="pacchetti">
   <div class="fi">
-    <div class="ey">07 · Pacchetti</div>
-    <h2>Tre livelli di intervento,<br/>calibrati sui <em class="g">findings.</em></h2>
+    <div class="ey">06 · Pacchetti</div>
+    <h2>Modelli di intervento differenziati per <em class="g">complessità e perimetro.</em></h2>
     <div class="dv"></div>
-    <p class="lead">Il package viene scelto dopo la Fase 0, sulla base di quello che emerge dall'analisi. Le attività indicate sono indicative e vengono adattate alla situazione specifica del cliente.</p>
+    <p class="lead">Abbiamo pensato a diverse soluzioni modulari per accompagnare le aziende. Sulla base delle evidenze emerse durante l'assessment, viene scelto il package più adatto. Le attività presentate sono indicative e vengono adattate alla situazione specifica del cliente.</p>
   </div>
   <div class="pkg-grid fi" style="transition-delay:.15s">
 
-    <!-- BASIC -->
+    <!-- STANDARD -->
     <div class="pkg">
-      <div class="pkg-eyebrow">Package 01</div>
-      <div class="pkg-name">Basic</div>
-      <div class="pkg-tagline">Foundation: prime integrazioni e dashboard operative</div>
+      <div class="pkg-eyebrow">Package 00 · Scope fisso</div>
+      <div class="pkg-name">Standard</div>
+      <div class="pkg-tagline">Perimetro definito, deliverable certi, nessuna variabile aperta</div>
       <div class="pkg-desc">
-        Indicato per aziende che partono da zero o che hanno bisogno di mettere ordine su 1–2 fonti dati prioritarie prima di espandere. Focus su quick win operativi e visibilità immediata sui KPI essenziali.
+        Pacchetto a perimetro chiuso: scope, attività e output sono definiti a priori e non cambiano. Indicato per chi vuole un primo risultato concreto e misurabile senza aprire un progetto personalizzato.
       </div>
-      <div class="pkg-act-label">Attività incluse</div>
+      <div class="pkg-act-label">Output garantiti</div>
       <ul class="pkg-act-list">
-        <li>Connessione e integrazione di una o due fonti dati prioritarie</li>
-        <li>Pipeline di pulizia e normalizzazione dati</li>
-        <li>Definizione e tracciamento dei KPI operativi principali</li>
-        <li>Dashboard operativa su misura</li>
-        <li>Documentazione tecnica e sessione di handover</li>
+        <li>Connessione di massimo 3 fonti dati su schema predefinito</li>
+        <li>Pipeline di pulizia e normalizzazione standard</li>
+        <li>Tracciamento di 5 KPI operativi su template consolidato</li>
+        <li>1 dashboard operativa su layout fisso</li>
+        <li>1 sessione di handover e documentazione tecnica base</li>
       </ul>
     </div>
 
-    <!-- INTERMEDIATE -->
+    <!-- HACK -->
+    <div class="pkg">
+      <div class="pkg-eyebrow">Package 01 · Progetto custom</div>
+      <div class="pkg-name">Hack</div>
+      <div class="pkg-tagline">Prime integrazioni custom, visibilità immediata sui dati prioritari</div>
+      <div class="pkg-desc">
+         Scope costruito sull'assessment: fonti dati scelte, KPI definiti insieme, dashboard su misura. Orientato ai quick win operativi con un setup che può evolvere.
+      </div>
+      <div class="pkg-act-label">Output inclusi</div>
+      <ul class="pkg-act-list">
+        <li>Connessione e integrazione delle fonti dati prioritarie identificate in fase di assessment</li>
+        <li>Pipeline di pulizia e normalizzazione su misura</li>
+        <li>KPI operativi definiti con il team cliente</li>
+        <li>Dashboard operativa custom con layout adattato al contesto</li>
+        <li>Documentazione tecnica e sessione di trasferimento</li>
+      </ul>
+    </div>
+
+    <!-- GROW -->
     <div class="pkg featured">
       <div class="feat-badge">✦ Più richiesto</div>
-      <div class="pkg-eyebrow">Package 02</div>
-      <div class="pkg-name">Intermediate</div>
-      <div class="pkg-tagline">Growth: multi-source, automazioni e primo modello predittivo</div>
+      <div class="pkg-eyebrow">Package 02 · Ecosistema multi-source</div>
+      <div class="pkg-name">Grow</div>
+      <div class="pkg-tagline">Integrazione multi-source, automazione dei processi e primo modello predittivo</div>
       <div class="pkg-desc">
-        Per aziende che hanno già qualche dato organizzato ma vogliono fare il salto: connettere più sistemi, eliminare la riconciliazione manuale e cominciare a guardare avanti con modelli predittivi.
+        Si connettono più sistemi, si elimina la riconciliazione manuale e si costruisce il primo layer predittivo. L'AI entra nei processi ricorrenti con skill e agenti configurati su misura.
       </div>
-      <div class="pkg-act-label">Attività incluse</div>
+      <div class="pkg-act-label">Output inclusi</div>
       <ul class="pkg-act-list">
-        <li>Connessione e riconciliazione automatica di 3 o più fonti dati</li>
-        <li>Pipeline di qualità dato su base ricorrente</li>
-        <li>Sviluppo API e skill AI per processi aziendali ripetitivi</li>
-        <li>Connessione con database esistente</li>
-        <li>Dashboard operativa + primo modello predittivo</li>
-        <li>Sistema di alerting automatico su anomalie</li>
+        <li>Integrazione e riconciliazione automatica di più fonti dati</li>
+        <li>Pipeline di qualità dato con monitoring ricorrente</li>
+        <li>Connessione con database esistente e sviluppo API custom</li>
+        <li>Skill AI per i processi aziendali ripetitivi ad alto volume</li>
+        <li>Dashboard operativa + primo modello predittivo su KPI chiave</li>
+        <li>Sistema di alerting automatico su anomalie e soglie definite</li>
         <li>Formazione team e documentazione estesa</li>
       </ul>
     </div>
 
-    <!-- ADVANCED -->
+    <!-- SCALE -->
     <div class="pkg">
-      <div class="pkg-eyebrow">Package 03</div>
-      <div class="pkg-name">Advanced</div>
-      <div class="pkg-tagline">Intelligence: ecosistema completo e AI predittiva</div>
+      <div class="pkg-eyebrow">Package 03 · Intelligenza operativa completa</div>
+      <div class="pkg-name">Scale</div>
+      <div class="pkg-tagline">Stack dati completo, AI predittiva custom e governance strutturata</div>
       <div class="pkg-desc">
-        Per organizzazioni che vogliono costruire un vantaggio competitivo strutturale sui dati: stack completo, modelli predittivi custom, governance del dato e automazione continua di tutti i processi ricorrenti.
+        Stack dati completo, modelli predittivi su misura, agenti AI su tutti i processi ricorrenti, governance del dato e autonomia operativa del team interno.
       </div>
-      <div class="pkg-act-label">Attività incluse</div>
+      <div class="pkg-act-label">Output inclusi</div>
       <ul class="pkg-act-list">
-        <li>Integrazione completa di tutte le fonti dati aziendali</li>
-        <li>Modelli predittivi custom su metriche di business chiave</li>
-        <li>Suite API e artefatti AI per processi ricorrenti</li>
+        <li>Integrazione completa di tutte le fonti dati aziendali rilevanti</li>
+        <li>Pipeline dati con data quality monitoring continuo e log strutturato</li>
+        <li>Suite API, skill AI e agenti su tutti i processi ricorrenti identificati</li>
+        <li>Modelli predittivi custom su più metriche di business</li>
         <li>Dashboard operativa e predittiva con aggiornamento real-time</li>
-        <li>Governance del dato e data quality monitoring continuo</li>
-        <li>Alerting avanzato e escalation automatica</li>
-        <li>Training approfondito al team interno</li>
-        <li>Documentazione tecnica completa e piano di manutenzione</li>
+        <li>Governance del dato: ownership, accessi, versioning, audit trail</li>
+        <li>Alerting avanzato con escalation automatica su soglie critiche</li>
+        <li>Programma di formazione approfondito e piano di manutenzione</li>
+        <li>Documentazione tecnica completa e affiancamento post go-live</li>
       </ul>
     </div>
 
   </div>
 </section>
 
-<!-- 08 FORMAZIONE -->
+<!-- 07 FORMAZIONE -->
 <section id="formazione">
   <div class="fi">
-    <div class="ey">08 · Formazione</div>
-    <h2>Formiamo il team<br/>perché <em class="g">l'AI resti accesa.</em></h2>
+    <div class="ey">07 · Formazione</div>
+    <h2>La formazione permette di <em class="g">acquisire le conoscenze</em> necessarie per la gestione delle soluzioni AI</h2>
     <div class="dv"></div>
-    <p class="lead">La formazione ha due anime. La prima è verticale: formiamo il team a gestire e far evolvere in autonomia tutto ciò che abbiamo costruito insieme, dai flussi di dati alle dashboard, dalle skill agli agenti configurati. La seconda è orizzontale: trasmettiamo le competenze per ideare e costruire nuove soluzioni AI, perché ogni azienda dovrebbe sapere come usare questi strumenti per risolvere problemi nuovi, non solo quelli già risolti.</p>
+    <p class="lead">Lavoriamo in modalità Build, Operate & Transfer. Progettiamo la soluzioni tecnologiche, le rendiamo operative ed effettuaimo il trasferimento di competenze. La nostra formazione ha due anime. La prima è verticale: formiamo il team a gestire e far evolvere in autonomia tutto ciò che abbiamo costruito insieme, dai flussi di dati alle dashboard, dalle skill agli agenti configurati. La seconda è orizzontale: trasmettiamo le competenze per ideare e costruire nuove soluzioni AI.</p>
   </div>
   <div class="form-grid fi" style="transition-delay:.1s">
     <div class="form-card">
@@ -704,11 +749,11 @@ em.g{color:var(--gold);font-style:normal}
   </div>
 </section>
 
-<!-- 09 NOTE OPERATIVE -->
+<!-- 08 NOTE OPERATIVE -->
 <section id="note">
   <div class="fi">
-    <div class="ey">09 · Note Operative</div>
-    <h2>Cose che vale la pena <em class="g">sapere.</em></h2>
+    <div class="ey">08 · Note Operative</div>
+    <h2>Punti di <em class="g">attenzione.</em></h2>
     <div class="dv"></div>
   </div>
   <div class="notes-grid fi" style="transition-delay:.1s">
