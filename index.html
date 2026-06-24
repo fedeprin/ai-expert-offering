@@ -52,7 +52,7 @@ h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(34px,4vw,62px);line-he
 h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,3vw,46px);line-height:1.1;font-weight:700;letter-spacing:-1px}
 h3{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;letter-spacing:-.3px}
 em.g{color:var(--gold);font-style:normal}
-.lead{font-size:16px;color:var(--muted);line-height:1.75;max-width:620px;margin-top:14px}
+.lead{font-size:16px;color:var(--muted);line-height:1.75;margin-top:14px}
 .dv{width:40px;height:2px;background:var(--gold);margin:18px 0 30px;opacity:.7}
 
 /* ── CARDS ── */
@@ -186,6 +186,15 @@ em.g{color:var(--gold);font-style:normal}
 .note h4{font-size:13.5px;font-weight:600;color:var(--white);margin-bottom:5px}
 .note p{font-size:12.5px;color:var(--muted);line-height:1.6}
 
+/* ── LICENSE NOTE ── */
+.license-note{margin:0;padding:28px 60px;border-bottom:1px solid var(--border);background:rgba(0,201,167,.04);border-left:none;border-right:none;display:flex;align-items:flex-start;gap:20px;position:relative;z-index:1}
+.license-note::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,rgba(0,201,167,.4),transparent)}
+.ln-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.ln-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.ln-title{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px;letter-spacing:-.2px}
+.ln-body{font-size:13px;color:var(--muted);line-height:1.7;max-width:720px}
+@media(max-width:900px){.license-note{padding:24px 20px}}
+
 /* ── FOOTER ── */
 .footer-sec{min-height:auto !important;padding:60px !important}
 .contact-line{font-size:14px;color:var(--muted);margin-top:12px}
@@ -267,7 +276,7 @@ em.g{color:var(--gold);font-style:normal}
     <h1>Da un patrimonio dati frammentato a un <em class="g">vantaggio competitivo</em> misurabile.</h1>
     <div class="dv"></div>
     <p class="lead">Le organizzazioni producono più dati che mai, ma secondo le principali analisi di settore oltre il 70% di questi dati non contribuisce ad alcuna decisione operativa. CRM, ERP, piattaforme marketing e strumenti analytics operano in silos separati: il risultato è un frazionamento delle informazioni, una mancanza di visione unificata e una perdita di valore. Dashboard che fotografano il passato, numeri che non si riconciliano tra sistemi, team che perdono ore ogni settimana ad allineare report prodotti da fonti diverse.</p>
-    <p style="margin-top:20px;font-size:16px;color:var(--muted);line-height:1.75">L'intelligenza artificiale ha aperto le porte per nuove opportunità. Per la prima volta è possibile aggregare fonti eterogenee, normalizzare il dato e costruire strati interpretativi senza sostituire l'infrastruttura esistente, ma lavorando sopra di essa. Approcci che richiedevano team dedicati e investimenti infrastrutturali significativi sono oggi implementabili in modo modulare e progressivo, compatibili con i sistemi già in essere.</p>
+    <p class="lead">L'intelligenza artificiale ha aperto le porte per nuove opportunità. Per la prima volta è possibile aggregare fonti eterogenee, normalizzare il dato e costruire strati interpretativi senza sostituire l'infrastruttura esistente, ma lavorando sopra di essa. Approcci che richiedevano team dedicati e investimenti infrastrutturali significativi sono oggi implementabili in modo modulare e progressivo, compatibili con i sistemi già in essere.</p>
     <p style="margin-top:20px;font-size:16px;color:var(--white);line-height:1.75;font-weight:500">L'obiettivo è trasformare il dato descrittivo in insight attivo, e l'insight in decisione strategica, risolvendo i problemi più comuni che caratterizzano il panorama attuale.</p>
   </div>
   <div class="ps-grid fi" style="transition-delay:.1s">
@@ -585,7 +594,8 @@ em.g{color:var(--gold);font-style:normal}
     </div>
     <div class="a0-right">
       <div class="a0-price-box">
-        <div class="price-main">€ 2.000</div>
+        <div class="price-old">€ 4.950</div>
+        <div class="price-main">€ 4.000</div>
         <div class="price-note">Investimento per la Fase 0 · IVA esclusa</div>
         <div class="discount-tag">✦ Prezzo di ingresso scontato</div>
       </div>
@@ -603,7 +613,7 @@ em.g{color:var(--gold);font-style:normal}
       </div>
       <div style="background:rgba(0,201,167,.04);border:1px solid rgba(0,201,167,.15);border-radius:10px;padding:16px 18px">
         <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:6px">Nota</div>
-        <p style="font-size:12.5px;color:var(--muted);line-height:1.6">Il costo dell'assessment viene scalato dal totale del package selezionato, se l'engagement prosegue entro 60 giorni dalla consegna dei findings.</p>
+        <p style="font-size:12.5px;color:var(--muted);line-height:1.6">Per i clienti che scelgono di proseguire con un pacchetto di implementazione a seguito dei findings, sono previsti meccanismi promozionali dedicati da definire in fase di proposta.</p>
       </div>
     </div>
   </div>
@@ -701,6 +711,16 @@ em.g{color:var(--gold);font-style:normal}
   </div>
 </section>
 
+<!-- LICENSE NOTE -->
+<div class="license-note fi">
+  <div class="ln-icon">⚡</div>
+  <div>
+    <div class="ln-label">Nota operativa</div>
+    <div class="ln-title">Licenze AI e costi API</div>
+    <p class="ln-body">I pacchetti coprono interamente il lavoro del team Ronin. I costi di licenza delle piattaforme AI e le fee API o qualsiasi altra tecnologia adottata nel progetto restano in capo al cliente come costi operativi dell'infrastruttura, separati dal compenso professionale. Tali costi vengono stimati durante la Fase di assessment e aggiornati progressivamente in base all'utilizzo reale.</p>
+  </div>
+</div>
+
 <!-- 07 FORMAZIONE -->
 <section id="formazione">
   <div class="fi">
@@ -775,7 +795,7 @@ em.g{color:var(--gold);font-style:normal}
       <div class="note-icon">📅</div>
       <div>
         <h4>Tempistiche indicative</h4>
-        <p>Fase 0: 2 o 3 settimane. Basic: circa 6 settimane. Intermediate: circa 3 mesi. Advanced: circa 5 o 6 mesi. I tempi variano in base alla disponibilità del team cliente e alla complessità dei sistemi.</p>
+        <p>Le tempistiche indicate sono elapsed, non giornate effettive di lavoro. Fase 0: 2 o 3 settimane. Standard: 3 o 4 settimane. Hack: 4 o 6 settimane. Grow: 2 o 3 mesi. Scale: 4 o 6 mesi. I tempi variano in base alla disponibilità del team cliente e alla complessità dei sistemi.</p>
       </div>
     </div>
     <div class="note">
